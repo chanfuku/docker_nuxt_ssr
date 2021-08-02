@@ -27,6 +27,8 @@ export default {
   plugins: [
   ],
 
+  serverMiddleware: ['~/api'],
+
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
