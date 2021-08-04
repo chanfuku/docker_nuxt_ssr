@@ -1,12 +1,12 @@
 import { PrismaClient } from '@prisma/client'
 
-const express = require('express')
+import express from 'express'
 const app = express()
 const prisma = new PrismaClient()
 
-app.get('/', (req, res) => {
-  main()
-  res.json({ message: 'hello, api' })
+app.get('/', async (req: express.Request, res: express.Response) => {
+  const result = await main()
+  res.json(result)
 })
 
 module.exports = {
@@ -18,7 +18,7 @@ async function main() {
   await prisma.user.create({
     data: {
       name: 'Alice',
-      email: 'alice@prisma.io',
+      email: `alice+${Date.now()}@gmail.com`,
       posts: {
         create: { title: 'Hello World' },
       },
@@ -35,4 +35,5 @@ async function main() {
     },
   })
   console.dir(allUsers, { depth: null })
+  return allUsers
 }
